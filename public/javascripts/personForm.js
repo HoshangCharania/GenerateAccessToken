@@ -11,7 +11,7 @@ formApp.controller('formController',function ($scope, $http) {
     $scope.generateToken = function()
     {
     $scope.wait="Please wait..."
-    $http.get("http://localhost:8887/JWT/api/TokenHandler.php", {
+    $http.get("api/TokenHandler.php", {
                 params: { access: "token"  }
                 })
     .then(function(response) {
@@ -38,7 +38,7 @@ formApp.controller('formController',function ($scope, $http) {
             data=$.param(data);
             var request = $http({
                         method: 'POST',
-                        url: 'http://localhost:8887/JWT/api/PersonHandler.php',
+                        url: 'api/PersonHandler.php',
                         data:  data,
                         headers: {'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8;'}
                         }).then(function successCallback(response) {
