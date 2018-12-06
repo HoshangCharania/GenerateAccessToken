@@ -2,6 +2,7 @@
 include_once 'HTTPRequest.php';
 class Token
 	{
+        
         /**
          * Token Class,
          * As the variables required to be json encoded and are also static,
@@ -13,7 +14,8 @@ class Token
         /**
          * You coud usually set up your pre processed details here.
          */
-        function __construct(){
+
+        function __construct($firstName,$lastName,$nickname){
             
         }
         /**
@@ -69,7 +71,7 @@ class Token
             $request= new HTTPRequest();
             $url="https://app.iformbuilder.com/exzact/api/oauth/token";
             $params=["grant_type" => "urn:ietf:params:oauth:grant-type:jwt-bearer", "assertion"=>$jwt];
-            $token=$request->HTTPPost($url,$params);
+            $token=$request->HTTPPost($url,http_build_query($params));
             return $token;
          }
 		
