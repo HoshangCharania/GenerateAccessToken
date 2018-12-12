@@ -13,8 +13,9 @@ class FieldMaker{
             $this->fields=["fields"=>[]];
      }
      /**
-      * @param fieldName
-      * @param fieldValue
+      * 
+      * @param String $fieldName
+      * @param String $fieldValue
       */
      function setField($fieldName,$fieldValue){
            $field=array("element_name"=>$fieldName,"value"=>$fieldValue);

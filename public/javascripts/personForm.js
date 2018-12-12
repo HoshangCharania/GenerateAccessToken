@@ -2,7 +2,10 @@ var formApp = angular.module('formApp', []);
 formApp.controller('formController',function ($scope, $http) {
     // create a blank object to hold our form information
     // $scope will allow this to pass between controller and view
+    var d = new Date();
+    var n = d.toISOString();
     $scope.formData = {};
+    $scope.formData.datetime = n;
     $scope.wait= "";
     /**
      * Generate a Token by sending a POST request to a server:

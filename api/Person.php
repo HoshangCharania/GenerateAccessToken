@@ -11,13 +11,19 @@ class Person
         private $firstName;
         private $lastName;
         private $nickname;
+        private $age;
+        private $datetime;
+        private $email;
         /**
          * You could usually set up your pre processed details here.
          */
-        function __construct($firstName,$lastName,$nickname){
+        function __construct($firstName,$lastName,$nickname,$email,$datetime,$age){
             $this->firstName=$firstName;
             $this->lastName=$lastName;
             $this->nickname=$nickname;
+            $this->email=$email;
+            $this->datetime=$datetime;
+            $this->age=$age;
         }
         /**
          * @description Get First Name
@@ -61,6 +67,48 @@ class Person
         protected function setNickname($nickname){
             $this->nickname=$nickname;
         }
+        /**
+         * @description Get Age
+         * @return String
+         */
+        protected function getAge(){
+            return $this->age;
+        }
+        /**
+         * @description Set Age
+         * @return String
+         */
+        protected function setAge($age){
+            $this->age=$age;
+        }
+        /**
+         * @description Get Datetime
+         * @return String
+         */
+        protected function getDatetime(){
+            return $this->datetime;
+        }
+        /**
+         * @description Set Datetime
+         * @return String
+         */
+        protected function setDatetime($datetime){
+            $this->datetime=$datetime;
+        }
+        /**
+         * @description Get Email
+         * @return String
+         */
+        protected function getEmail(){
+            return $this->email;
+        }
+        /**
+         * @description Set Email
+         * @return String
+         */
+        protected function setEmail($email){
+            $this->email=$email;
+        }
          /**
           *  @description Add to the Form
           *  @param access_token
@@ -72,6 +120,10 @@ class Person
             $fields->setField('first_name',$this->getFirstName());
             $fields->setField('last_name',$this->getLastName());
             $fields->setField('nickname',$this->getNickname());
+            //$fields->setField('datetime', $this->getDatetime());
+            // DateTime format confused.Not mentioned clear ind docs.
+            $fields->setField('email', $this->getEmail());
+            $fields->setField('age', $this->getAge());
             $params=$fields->getFields(); 
             $url="https://app.iformbuilder.com/exzact/api/v60/profiles/481947/pages/3728385/records";
             $request= new HTTPRequest();
