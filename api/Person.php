@@ -120,7 +120,7 @@ class Person
             $fields->setField('first_name',$this->getFirstName());
             $fields->setField('last_name',$this->getLastName());
             $fields->setField('nickname',$this->getNickname());
-            //$fields->setField('datetime', $this->getDatetime());
+            $fields->setField('datetime', $this->getDatetime());
             // DateTime format confused.Not mentioned clear ind docs.
             $fields->setField('email', $this->getEmail());
             $fields->setField('age', $this->getAge());
