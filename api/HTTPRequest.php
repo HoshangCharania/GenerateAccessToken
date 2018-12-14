@@ -21,6 +21,28 @@ class HTTPRequest {
         curl_close($curl);
         return $response;
     }
+    public static function HTTPGet($url,$header){
+        $curl = curl_init($url);
+        curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+        if($header!=null){
+            curl_setopt($curl, CURLOPT_HTTPHEADER, $header);
+        }
+        $response = curl_exec($curl);
+        curl_close($curl);
+        return $response;
+    }
+    public static function HTTPPut($url,$query,$header){
+        $curl = curl_init($url);
+        curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'PUT');
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $query);
+        if($header!=null){
+            curl_setopt($curl, CURLOPT_HTTPHEADER, $header);
+        }
+        $response = curl_exec($curl);
+        curl_close($curl);
+        return $response;
+    }
 }
 
 ?>

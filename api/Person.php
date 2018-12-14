@@ -146,7 +146,7 @@ class Person
           *  @param access_token
           *  @return HTTP-Response
           */
-         function add($access_token){
+         public function add($access_token){
             $fields=new FieldMaker();
             /* Add each attribute to the fields array */
             $fields->setField('first_name',$this->getFirstName());
@@ -167,6 +167,16 @@ class Person
             );
             $response=$request->HTTPPost($url,$params,$header);
             return $response;
+         }
+         public static function view($access_token,$id){
+             $request= new HTTPRequest();
+             $header = array(
+                "Authorization: Bearer " . $access_token,
+                "Content-Type: application/json"
+            );
+            $url="https://app.iformbuilder.com/exzact/api/v60/profiles/481947/pages/3728385/records/".$id;
+            $response=$request->HTTPGet($url,$header);
+             return $response; 
          }
 		
     } 
