@@ -14,16 +14,20 @@ class Person
         private $age;
         private $datetime;
         private $email;
+        private $zip;
+        private $info;
         /**
          * You could usually set up your pre processed details here.
          */
-        function __construct($firstName,$lastName,$nickname,$email,$datetime,$age){
+        function __construct($firstName,$lastName,$nickname,$email,$datetime,$age,$zip,$info){
             $this->firstName=$firstName;
             $this->lastName=$lastName;
             $this->nickname=$nickname;
             $this->email=$email;
             $this->datetime=$datetime;
             $this->age=$age;
+            $this->zip=$zip;
+            $this->info=$info;
         }
         /**
          * @description Get First Name
@@ -109,6 +113,34 @@ class Person
         protected function setEmail($email){
             $this->email=$email;
         }
+        /**
+         * @description Get Zip
+         * @return String
+         */
+        protected function getZip(){
+            return $this->zip;
+        }
+        /**
+         * @description Set Zip
+         * @return String
+         */
+        protected function setZip($zip){
+            $this->zip=$zip;
+        }
+        /**
+         * @description Get Info
+         * @return String
+         */
+        protected function getInfo(){
+            return $this->info;
+        }
+        /**
+         * @description Set Info
+         * @return String
+         */
+        protected function setInfo($info){
+            $this->info=$info;
+        }
          /**
           *  @description Add to the Form
           *  @param access_token
@@ -124,6 +156,8 @@ class Person
             // DateTime format confused.Not mentioned clear ind docs.
             $fields->setField('email', $this->getEmail());
             $fields->setField('age', $this->getAge());
+            $fields->setField('zip', $this->getZip());
+            $fields->setField('info', $this->getInfo());
             $params=$fields->getFields(); 
             $url="https://app.iformbuilder.com/exzact/api/v60/profiles/481947/pages/3728385/records";
             $request= new HTTPRequest();

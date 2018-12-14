@@ -15,7 +15,7 @@ class Token
          * You coud usually set up your pre processed details here.
          */
 
-        function __construct($firstName,$lastName,$nickname){
+        function __construct(){
             
         }
         /**
