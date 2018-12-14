@@ -19,7 +19,10 @@ class Person
         /**
          * You could usually set up your pre processed details here.
          */
-        function __construct($firstName,$lastName,$nickname,$email,$datetime,$age,$zip,$info){
+        function __construct($firstName,$lastName,$nickname,$email,$datetime,$age,$zip,$info,$id=null){
+            if($id!=null){
+                $this->id=$id;
+            }
             $this->firstName=$firstName;
             $this->lastName=$lastName;
             $this->nickname=$nickname;
@@ -28,6 +31,20 @@ class Person
             $this->age=$age;
             $this->zip=$zip;
             $this->info=$info;
+        }
+        /**
+         * @description Get ID
+         * @return id
+         */
+        protected function getID(){
+            return $this->id;
+        }
+        /**
+         * @description Set ID
+         * @return ID
+         */
+        protected function setID($id){
+            $this->id=$id;
         }
         /**
          * @description Get First Name
@@ -176,6 +193,28 @@ class Person
             );
             $url="https://app.iformbuilder.com/exzact/api/v60/profiles/481947/pages/3728385/records/".$id;
             $response=$request->HTTPGet($url,$header);
+             return $response; 
+         }
+         public function edit($access_token){
+            $fields=new FieldMaker();
+            /* Add each attribute to the fields array */
+            $fields->setField('first_name',$this->getFirstName());
+            $fields->setField('last_name',$this->getLastName());
+            $fields->setField('nickname',$this->getNickname());
+            $fields->setField('datetime', $this->getDatetime());
+            // DateTime format confused.Not mentioned clear ind docs.
+            $fields->setField('email', $this->getEmail());
+            $fields->setField('age', $this->getAge());
+            $fields->setField('zip', $this->getZip());
+            $fields->setField('info', $this->getInfo());
+            $params=$fields->getFields(); 
+             $request= new HTTPRequest();
+             $header = array(
+                "Authorization: Bearer " . $access_token,
+                "Content-Type: application/json"
+            );
+            $url="https://app.iformbuilder.com/exzact/api/v60/profiles/481947/pages/3728385/records/".$this->getID();
+            $response=$request->HTTPPut($url,$params,$header);
              return $response; 
          }
 		

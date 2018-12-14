@@ -31,7 +31,6 @@ and open the template in the editor.
                               </div>
                             <button type="button" class="btn btn-primary" ng-click="generateToken()" ng-disabled="getPerson.$invalid">Get Person</button>
                         </form>
-                        {{ dummy }}
                  <form method="POST" name="personForm" ng-submit="generateToken()" novalidate>
                   <div class="form-group">
                       <label for="category">First Name</label>
@@ -74,7 +73,7 @@ and open the template in the editor.
                         <textarea class="form-control" rows="5" id="info" name="info" ng-model="formData.info" required></textarea>
                         <span ng-show="personForm.info.$error.required">Enter your info.</span>
                     </div>
-                  <button type="button" class="btn btn-primary" ng-click="generateToken()" ng-disabled="personForm.$invalid">Create User</button>
+                  <button type="button" class="btn btn-primary" ng-click="putRequest()" ng-disabled="personForm.$invalid">Create User</button>
           </form>
                   {{ date }}
                 <div class="row mt-4">
@@ -198,21 +197,43 @@ formApp.controller('formController',function ($scope, $http) {
                         }).then(function successCallback(response) {
                                     //alert("success");
                                     console.log(response.data)
-                                    $scope.dummy=response.data;
+                                    $scope.access_token=access_token;
+                                    $scope.id=id;
                                     $scope.formData=response.data;
 
                         }, function errorCallback(response) {
                             $scope.wait = "Error: Please contact support: "+response.statusText;
                         });
     }
+    
     /**
     * idCreated:
     * 
     * @param {number} id
     * 
     */ 
-    
-    });
+    $scope.putRequest = function(val){
+        //$scope.access_token,$scope.id
+        data=$scope.formData;
+        data["id"]=$scope.id;
+        data["access_token"]=$scope.access_token;
+        data=$.param(data);
+        var request = $http({
+                        method: 'POST',
+                        url: 'api/PutPersonHandler.php',
+                        data: data,
+                        headers: {'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8;'}
+                        }).then(function successCallback(response) {
+                                    alert("success");
+                                    console.log(response.data)
+                                    $scope.access_token=access_token;
+                                    console.log(response.data);
+
+                        }, function errorCallback(response) {
+                            $scope.wait = "Error: Please contact support: "+response.statusText;
+                        });
+    }
+});
         </script>
     </body>
 </html>
