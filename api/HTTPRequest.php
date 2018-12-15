@@ -6,6 +6,7 @@ class HTTPRequest {
      * 
      * @param       url
      * @param       params
+     * @param       header
      * @return      HTTP-Response
      */
     public static function HTTPPost($url,$params,$header=null) {
@@ -21,6 +22,13 @@ class HTTPRequest {
         curl_close($curl);
         return $response;
     }
+    /**
+     * @description HTTP Get Request
+     * 
+     * @param       url
+     * @param       header
+     * @return      HTTP-Response
+     */
     public static function HTTPGet($url,$header){
         $curl = curl_init($url);
         curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
@@ -31,6 +39,14 @@ class HTTPRequest {
         curl_close($curl);
         return $response;
     }
+    /**
+     * @description HTTP Put Request
+     * 
+     * @param String $url
+     * @param JSON $params
+     * @param JSON $header
+     * @return HTTP-Response
+     */
     public static function HTTPPut($url,$params,$header){
         $query = $params;
         $curl = curl_init($url);

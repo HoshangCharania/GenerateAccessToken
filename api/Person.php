@@ -185,6 +185,12 @@ class Person
             $response=$request->HTTPPost($url,$params,$header);
             return $response;
          }
+         /**
+          *  @description View Form
+          *  @param access_token
+          *  @param id
+          *  @return HTTP-Response
+          */
          public static function view($access_token,$id){
              $request= new HTTPRequest();
              $header = array(
@@ -195,6 +201,11 @@ class Person
             $response=$request->HTTPGet($url,$header);
              return $response; 
          }
+         /**
+          *  @description Add to the Form
+          *  @param access_token
+          *  @return HTTP-Response
+          */
          public function edit($access_token){
             $fields=new FieldMaker();
             /* Add each attribute to the fields array */
