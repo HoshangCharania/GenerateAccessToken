@@ -14,9 +14,7 @@ formApp.controller('formController',function ($scope, $http) {
     $scope.generateToken = function()
     {
     $scope.wait="Please wait..."
-    $http.get("/token/new", {
-                params: { access: "token"  }
-                })
+    $http.get("/token/new")
     .then(function(response) {
         val=response.data;
         //alert(JSON.stringify(val));
