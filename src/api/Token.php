@@ -1,5 +1,7 @@
 <?php
-include_once 'HTTPRequest.php';
+namespace App\Api;
+use App\Api\HTTPRequest;
+
 class Token
 	{
         
@@ -66,7 +68,7 @@ class Token
           *  @description request Token
           *
           */
-         function requestToken(){
+         public function requestToken(){
             $jwt=$this->getJWT();
             $request= new HTTPRequest();
             $url="https://app.iformbuilder.com/exzact/api/oauth/token";

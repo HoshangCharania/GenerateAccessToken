@@ -14,27 +14,27 @@ and open the template in the editor.
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
-  <script src="public/javascripts/getPersonForm.js"></script>
+  <script src="/public/javascripts/getPersonForm.js"></script>
 </head>
     <body>
+        <script>
+            /**
+             * 
+             * @returns {undefined}
+             * 
+             */
+            formData=<?= $person ?>;
+        </script>
         <div ng-app="formApp" ng-controller="formController"> 
                 <div class="container-fluid">
                     <div class="jumbotron mt-4">
                         <div class="header">
                             <h2>View a User:</h2>
                           </div>
-                        <form method="GET" name="getPerson" ng-submit="generateToken()" novalidate>
-                            <div class="form-group">
-                                <label for="category">ID</label>
-                                <input type="number" class="form-control" id="personID" name="personID" ng-model="getData.personID" required>
-                                <span ng-show="getPerson.personID.$error.required">The  id is required.</span>
-                              </div>
-                            <button type="button" class="btn btn-primary" ng-click="generateToken()" ng-disabled="getPerson.$invalid">Get Person</button>
-                        </form>
                  <form method="POST" name="personForm" ng-submit="generateToken()" novalidate>
                   <div class="form-group">
                       <label for="category">First Name</label>
-                      <input type="text" class="form-control" id="first_name" name="first_name" ng-model="formData.first_name" required>
+                      <input type="text" class="form-control" id="first_name" name="first_name" value="<?= $person->first_name; ?>" ng-model="formData.first_name" required>
                       <span ng-show="personForm.first_name.$error.required">The First name is required.</span>
                   </div>
                   <div class="form-group">
@@ -73,7 +73,7 @@ and open the template in the editor.
                         <textarea class="form-control" rows="5" id="info" name="info" ng-model="formData.info" required></textarea>
                         <span ng-show="personForm.info.$error.required">Enter your info.</span>
                     </div>
-                  <button type="button" class="btn btn-primary" ng-click="putRequest()" ng-disabled="personForm.$invalid">Update User</button>
+                  <button type="button" class="btn btn-primary" ng-click="generateToken()" ng-disabled="personForm.$invalid">Update User</button>
           </form>
                   {{ date }}
                 <div class="row mt-4">

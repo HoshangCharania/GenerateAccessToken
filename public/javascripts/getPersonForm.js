@@ -14,16 +14,20 @@ formApp.controller('formController',function ($scope, $http) {
      * Generate a Token by sending a POST request to a server:
      *  
      **/
+    $scope.formData=formData;
+    $scope.prevData=formData;
+    id=formData["id"];
     $scope.generateToken = function()
     {
     $scope.wait="Please wait..."
-    $http.get("api/TokenHandler.php", {
+    $http.get("/token/new", {
                 params: { access: "token"  }
                 })
     .then(function(response) {
         val=response.data;
+        $scope.access_token=val["access_token"];
         //alert(JSON.stringify(val));
-        $scope.getRequest(val);
+        $scope.putRequest();
     }, function errorCallback(response) {
         $scope.wait = "Error: Please contact support: "+response.statusText;
     });
@@ -37,7 +41,7 @@ formApp.controller('formController',function ($scope, $http) {
      * 
      * @param {String} val  
      */
-    $scope.getRequest =  function(val)
+    /*$scope.getRequest =  function(val)
     {
             
             data={};
@@ -47,7 +51,7 @@ formApp.controller('formController',function ($scope, $http) {
             //data=$.param(data);
             var request = $http({
                         method: 'GET',
-                        url: 'api/GetPersonHandler.php?id='+id+'&access_token='+access_token,
+                        url: '/api/GetPersonHandler.php?id='+id+'&access_token='+access_token,
                         headers: {'Content-Type': 'application/json;charset=utf-8;'}
                         }).then(function successCallback(response) {
                                     //alert("success");
@@ -59,7 +63,7 @@ formApp.controller('formController',function ($scope, $http) {
                         }, function errorCallback(response) {
                             $scope.wait = "Error: Please contact support: "+response.statusText;
                         });
-    }
+    } */
     
     /**
     * idCreated:
@@ -67,23 +71,23 @@ formApp.controller('formController',function ($scope, $http) {
     * @param {number} id
     * 
     */ 
-    $scope.putRequest = function(val){
+    $scope.putRequest = function(){
         //$scope.access_token,$scope.id
-        data=$scope.formData;
-        data["id"]=$scope.id;
+        console.log(formData["id"]);
+        data=$scope.formData;  // Not recommmended, magic numbers, need to fix issue.
+        data["id"]=id;
+        url='/person/edit/'+id;
         data["access_token"]=$scope.access_token;
+        data_trial=JSON.parse(JSON.stringify(data));
         data=$.param(data);
         var request = $http({
-                        method: 'POST',
-                        url: 'api/PutPersonHandler.php',
+                        method: 'PUT',
+                        url: url,
                         data: data,
                         headers: {'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8;'}
                         }).then(function successCallback(response) {
-                                    alert("success");
-                                    console.log(response.data)
-                                    $scope.access_token=access_token;
-                                    console.log(response.data);
-
+                                    alert("successfully updated record.");
+                                    $scope.wait="";
                         }, function errorCallback(response) {
                             $scope.wait = "Error: Please contact support: "+response.statusText;
                         });

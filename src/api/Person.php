@@ -1,6 +1,7 @@
 <?php
-include_once 'HTTPRequest.php';
-include_once 'FieldMaker.php';
+namespace App\Api;
+use App\Api\HTTPRequest;
+use App\Api\FieldMaker;
 class Person
 	{
         /**
@@ -22,6 +23,8 @@ class Person
         function __construct($firstName,$lastName,$nickname,$email,$datetime,$age,$zip,$info,$id=null){
             if($id!=null){
                 $this->id=$id;
+            }else{
+                $this->id=null;
             }
             $this->firstName=$firstName;
             $this->lastName=$lastName;

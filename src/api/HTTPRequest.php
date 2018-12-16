@@ -1,5 +1,5 @@
 <?php 
-
+namespace App\Api;
 class HTTPRequest {
     /**
      * @description HTTP Post Request

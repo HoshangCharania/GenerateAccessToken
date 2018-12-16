@@ -9,7 +9,7 @@
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
-  <script src="public/javascripts/personForm.js"></script>
+  <script src="/public/javascripts/personForm.js"></script>
 </head>
 <body>
 <div ng-app="formApp" ng-controller="formController"> 
@@ -62,7 +62,6 @@
                           <label for="category">Zip</label>
                           <input type="number" class="form-control" minlength="5" maxlength="5" id="zip" name="zip" ng-model="formData.zip" required>
                           <span ng-show="personForm.zip.$error.required">The  zip is required.</span><span ng-show="!personForm.zip.$valid"> Has to be of length-5.</span>
-                          
                     </div>
                     <div class="form-group">
                         <label for="info">Info</label>
